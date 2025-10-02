@@ -1,3 +1,4 @@
+package model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +12,7 @@ public class Student {
     private int course;
     private String group;
 
-    Student(int id, String name_surn_middlen,
+    public Student(int id, String name_surn_middlen,
             String date_of_birth, String address, String phone_number,
             String faculty, int course, String group) {
 
@@ -25,7 +26,7 @@ public class Student {
                          int course, String group) {
         this.id = id;
         this.name_surn_middlen = nameSurnMiddlen;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.date_of_birth = LocalDate.parse(dateOfBirth, formatter);
         this.address = address;
         this.phone_number = phoneNumber;
@@ -34,30 +35,46 @@ public class Student {
         this.group = group;
     }
 
-    // гетери
-    public  int getId(int id) {
-        return id;
+    @Override
+    public String toString() {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String formattedDate = date_of_birth.format(outputFormatter);
+
+        return  "\n -- Студент № " + id + "--" +
+                "\n ПІБ:" + name_surn_middlen +
+                "\n Факультет:" + faculty +
+                "\n Курс:" + course +
+                "\n Група:" + group +
+                "\n Дата народження:" + formattedDate +
+                "\n Адреса:" + address +
+                "\n Номер телефону:" + phone_number;
+
     }
-    public String getName(String name_surn_middlen) {
-        return name_surn_middlen;
+
+    // гетери
+    public  int getId() {
+        return this.id;
+    }
+    public String getName() {
+        return this.name_surn_middlen;
     }
     public LocalDate getDateOfBirth() {
-        return date_of_birth;
+        return this.date_of_birth;
     }
     public String getAddress() {
-        return address;
+        return this.address;
     }
     public String getPhoneNumber() {
-        return phone_number;
+        return this.phone_number;
     }
     public String getFaculty() {
-        return faculty;
+        return this.faculty;
     }
     public int getCourse() {
-        return course;
+        return this.course;
     }
     public String getGroup() {
-        return group;
+        return this.group;
     }
 }
 
