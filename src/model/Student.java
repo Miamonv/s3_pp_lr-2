@@ -38,31 +38,24 @@ public class Student {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setName_surn_middlen(String name_surn_middlen) {
         this.name_surn_middlen = name_surn_middlen;
     }
-
     public void setDate_of_birth(LocalDate date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
-
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
-
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }
-
     public void setCourse(int course) {
         this.course = course;
     }
-
     public void setGroup(String group) {
         this.group = group;
     }

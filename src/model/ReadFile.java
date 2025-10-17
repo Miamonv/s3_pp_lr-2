@@ -1,13 +1,16 @@
 package model;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 public class ReadFile {
+    protected static File myObj = new File("list of students.txt");
+
     public static ArrayList<Student> read() {
         ArrayList<Student> students = new ArrayList<>();
-        File myObj = new File("list of students.txt");
 
         try (Scanner myReader = new Scanner(myObj)) {
             while (myReader.hasNextLine()) {
@@ -31,5 +34,27 @@ public class ReadFile {
             e.printStackTrace();
         }
         return students;
+    }
+
+    public static void closeProgram(ArrayList<Student> students) {
+
+        DateTimeFormatter fileWriteFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try(FileWriter writer = new FileWriter("list of students.txt", false)){
+            for (Student student : students) {
+                String formattedDate = student.getDateOfBirth().format(fileWriteFormatter);
+                writer.write(
+                        student.getId() + ", " +
+                                student.getName() + ", " +
+                                formattedDate + ", " +
+                                student.getAddress() + ", " +
+                                student.getPhoneNumber() + ", " +
+                                student.getFaculty() + ", " +
+                                student.getCourse() + ", " +
+                                student.getGroup() + "\n"
+                );
+            }
+        } catch (Exception e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
     }
 }

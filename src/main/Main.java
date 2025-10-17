@@ -26,7 +26,7 @@ class Main {
             if (choice == 4) listOfGroup(students);
             if (choice == 5) addStudent(students);
             if (choice == 6) deleteStudent(students);
-            if (choice == 0) return;
+            if (choice == 0) ReadFile.closeProgram(students);
             if (choice < 0 || choice > 6) {
                 System.out.println("НЕПРАВИЛЬНО ВВЕДЕНЕ ЧИСЛО!!!!!!!!!!!\n Спробуйте ще раз :)");
             }
@@ -43,7 +43,7 @@ class Main {
                 menu(students);
                 break;
             }
-            else if (choice.equalsIgnoreCase("Ні")) return;
+            else if (choice.equalsIgnoreCase("Ні")) ReadFile.closeProgram(students);;
 
         } while (!choice.equals("Так") && !choice.equals("так") &&
                 !choice.equals("Ні") && !choice.equals("ні"));
