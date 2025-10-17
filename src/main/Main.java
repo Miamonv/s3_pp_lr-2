@@ -50,15 +50,18 @@ class Main {
     }
 
     void printAllStudents(ArrayList<Student> students) {
+        int counter = 0;
         for (Student student : students) {
             System.out.println(student);
+            counter++;
         }
+        System.out.print("Виведено " + counter + " студентів\n");
 
         returnToMenu(students);
     }
     void studentsByFaculty(ArrayList<Student> students) {
         String faculty;
-        int check = 0;
+        int check = 0, counter = 0;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Введіть назву факультету:\n");
@@ -68,15 +71,17 @@ class Main {
             if (faculty.equals(stud.getFaculty())) {
                 System.out.println(stud + "\n");
                 check = 1;
+                counter++;
             }
         }
         if (check == 0) System.out.println("По запиту нічого не знайдено\n");
+        System.out.print("Виведено " + counter + " студентів\n");
 
         returnToMenu(students);
     }
 
     void studentsByYear(ArrayList<Student> students) {
-        int year, check = 0;
+        int year, check = 0, counter = 0;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Введіть рік, з яким порівнювати (напр. 2005):\n");
@@ -87,15 +92,17 @@ class Main {
             if (year < (stud.getDateOfBirth().getYear())) {
                 System.out.println(stud + "\n");
                 check = 1;
+                counter++;
             }
         }
         if (check == 0) System.out.println("По запиту нічого не знайдено\n");
+        System.out.print("Виведено " + counter + " студентів\n");
 
         returnToMenu(students);
     }
     void listOfGroup(ArrayList<Student> students) {
         String group;
-        int check = 0;
+        int check = 0, counter = 0;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Введіть групу для пошуку (напр. ОІ-11):\n");
@@ -105,9 +112,11 @@ class Main {
             if (group.equals(stud.getGroup())){
                 System.out.println(stud + "\n");
                 check = 1;
+                counter++;
             }
         }
         if (check == 0) System.out.println("По запиту нічого не знайдено\n");
+        System.out.print("Виведено " + counter + " студентів\n");
 
         returnToMenu(students);
     }
