@@ -12,9 +12,12 @@ public class ReadFile {
     public static ArrayList<Student> read() {
         ArrayList<Student> students = new ArrayList<>();
 
+        if (!myObj.exists()) return students;
+
         try (Scanner myReader = new Scanner(myObj)) {
             while (myReader.hasNextLine()) {
                 String line = myReader.nextLine();
+                if (line.isEmpty()) continue;
                 String[] parts = line.split(",\\s*");
 
                 int ID = Integer.parseInt(parts[0]);
@@ -36,10 +39,10 @@ public class ReadFile {
         return students;
     }
 
-    public static void closeProgram(ArrayList<Student> students) {
+    public static void closeProgram (ArrayList<Student> students) {
 
         DateTimeFormatter fileWriteFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        try(FileWriter writer = new FileWriter("list of students.txt", false)){
+        try(FileWriter writer = new FileWriter("list of students.txt", false)) {
             for (Student student : students) {
                 String formattedDate = student.getDateOfBirth().format(fileWriteFormatter);
                 writer.write(

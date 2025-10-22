@@ -124,7 +124,7 @@ class Main {
         Scanner sc = new Scanner(System.in);
         System.out.print("Введіть ПІБ студента: ");
         String name =  sc.nextLine();
-        System.out.print("Введіть дату народження: ");
+        System.out.print("Введіть дату народження (напр. 01/12/2001): ");
         String date = sc.nextLine();
         System.out.print("Введіть місто проживання: ");
         String address = sc.nextLine();
@@ -132,15 +132,39 @@ class Main {
         String phone_number = sc.nextLine();
         System.out.print("Введіть факультет: ");
         String faculty = sc.nextLine();
-        System.out.print("Введіть номер курсу: ");
-        int course = Integer.parseInt(sc.nextLine());
-        System.out.print("Введіть групу (напр. ОІ-11): ");
-        String group = sc.nextLine();
 
-        int newId = students.get(students.size() - 1).getId() + 1;
-        students.add(new Student(newId, name, date, address, phone_number, faculty, course, group));
+        int course;
+        while (true) {
+            System.out.print("Введіть номер курсу(магістратура 1 курс - 5 і тд): ");
+            try {
+                course = Integer.parseInt(sc.nextLine());
+                if (course > 0 && course <= 7) {
+                    break;
+                } else {
+                    System.out.println("Некоректний курс. Курс має бути числом від 1 до 7.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Некоректний ввід. Введіть ціле число.");
+            }
+        }
 
-        returnToMenu(students);
+        String expectedGroupStart = String.valueOf(course);
+        while (true) {
+            System.out.print("Введіть групу (напр. ОІ-11): ");
+            String group = sc.nextLine().trim();
+
+            String[] parts = group.split("-");
+            String numberOfGroupStart = parts[1].substring(0, 1);
+
+            if (expectedGroupStart.equals(numberOfGroupStart)) {
+                int newId = students.get(students.size() - 1).getId() + 1;
+                students.add(new Student(newId, name, date, address, phone_number, faculty, course, group));
+                this.returnToMenu(students);
+                return;
+            } else {
+                System.out.println("Група не відповідає курсу\n");
+            }
+        }
     }
 
     void deleteStudent(ArrayList<Student> students) {
